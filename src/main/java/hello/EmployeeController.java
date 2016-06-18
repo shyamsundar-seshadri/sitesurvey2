@@ -3,10 +3,19 @@ package hello;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.FormParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mongodb.Block;
@@ -20,10 +29,11 @@ public class EmployeeController {
 	String username = null;
 
 	@RequestMapping("/login")
-	public EmployeeDetail loginDetails() {
+	@CrossOrigin(origins = {"http://localhost:6001","http://sitesurvey.mybluemix.net"})
+	public Response loginDetails(@QueryParam("username") String user,@QueryParam("password") String password) {
 
-		String user = "rajiv";
-		String password = "rajivkr";
+		//String user = "rajiv";
+		//String password = "rajivkr";
 		EmployeeDetail employeeDetail = new EmployeeDetail();
 		System.out.println("data received is" + user + "pass" + password);
 		MongoClient client = DbUtility.getClient();
@@ -33,6 +43,7 @@ public class EmployeeController {
 		if (employeeDetails == null) {
 			System.out.println("Unable to login");
 			client.close();
+			return Response.status(Status.SERVICE_UNAVAILABLE).build();
 		}
 		employeeDetails.forEach(new Block<Document>() {
 			public void apply(final Document document) {
@@ -80,7 +91,7 @@ public class EmployeeController {
 		employeeDetail.setCustomerDetails(customerDetails);
 
 		client.close();
-		return employeeDetail;
+		return Response.ok(employeeDetail).build();
 	}
 
 	@RequestMapping("/facilities")
