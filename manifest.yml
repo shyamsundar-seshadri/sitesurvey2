@@ -1,0 +1,8 @@
+---
+applications:
+- name: sitesurveyjava
+  memory: 256M
+  instances: 1
+  domain: mybluemix.net
+  host: sitesurveyjava
+  path: target/gs-rest-service-0.1.0.jar
