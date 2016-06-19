@@ -10,6 +10,7 @@ public class Customer {
 	private String mobileNumber;
 	private String survey;
 	private String surveyTime;
+	private String jobId;
 	private List<String> pictureUrl;
 	
 	public String getName() {
@@ -53,6 +54,12 @@ public class Customer {
 	}
 	public void setPictureUrl(List<String> pictureUrl) {
 		this.pictureUrl = pictureUrl;
+	}
+	public String getJobId() {
+		return jobId;
+	}
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
 	}
 	
 	
