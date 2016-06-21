@@ -4,14 +4,15 @@ import java.util.List;
 
 public class Engineers {
 
-	private List<String> engineers;
+	private List<Engineer> engineers;
 
-	public List<String> getEngineers() {
+	public List<Engineer> getEngineers() {
 		return engineers;
 	}
 
-	public void setEngineers(List<String> engineers) {
+	public void setEngineers(List<Engineer> engineers) {
 		this.engineers = engineers;
 	}
 
+	
 }

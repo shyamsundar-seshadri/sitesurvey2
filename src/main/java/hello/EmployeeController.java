@@ -236,12 +236,15 @@ public class EmployeeController {
 			System.out.println("Unable to find engineers");
 			client.close();
 		}
-		List<String> engineers = new ArrayList<String>();
+		List<Engineer> engineers = new ArrayList<Engineer>();
 		engAvailable.forEach(new Block<Document>() {
 			public void apply(final Document document) {
+				Engineer engineer = new Engineer();
 				System.out.println("fetched doc is" + document.toString());
 				JSONObject json = new JSONObject(document.toJson());
-				engineers.add(json.getString("id"));
+				engineer.setId(json.getString("id"));
+				engineer.setName(json.getString("name"));
+				engineers.add(engineer);
 			}
 		});
 		client.close();
