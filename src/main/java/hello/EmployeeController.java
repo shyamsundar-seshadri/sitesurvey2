@@ -48,7 +48,7 @@ public class EmployeeController {
 		System.out.println("dbname is " + DbUtility.dbname);
 		MongoDatabase db = client.getDatabase(DbUtility.dbname);
 		FindIterable<Document> employeeDetails = db.getCollection(
-				"employee_details").find(new Document("uname", user));
+				"employee_details").find(new Document("uname", user.toLowerCase()));
 		if (employeeDetails == null) {
 			System.out.println("Unable to login");
 			client.close();
