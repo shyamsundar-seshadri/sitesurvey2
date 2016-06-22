@@ -14,7 +14,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -269,6 +271,12 @@ public class EmployeeController {
 			response = "sucess";
 		client.close();
 		return response;
+	}
+	
+	public void main(@Context HttpServletRequest request){
+		MongoClient client = DbUtility.getClient();
+		MongoDatabase db = client.getDatabase(DbUtility.dbname);
+		System.out.println(db.getCollection("survey_photos").count());
 	}
 	
 
